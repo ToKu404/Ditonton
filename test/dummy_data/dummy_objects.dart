@@ -84,3 +84,5 @@ final testTvDetail = TvDetail(
     ],
     voteAverage: 0.0,
     voteCount: 0);
+
+final testTvList = [testTv];

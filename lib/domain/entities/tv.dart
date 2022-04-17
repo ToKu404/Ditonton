@@ -13,6 +13,13 @@ class Tv extends Equatable {
     required this.overview,
   });
 
+  Tv.watchlist({
+    required this.id,
+    required this.overview,
+    required this.posterPath,
+    required this.name,
+  });
+
   @override
   List<Object?> get props => [posterPath, id, name, overview];
 }
