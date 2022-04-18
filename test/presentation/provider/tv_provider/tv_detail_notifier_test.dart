@@ -39,7 +39,7 @@ main() {
     mockRemoveWatchlist = MockRemoveWatchlistTv();
     provider = TvDetailNotifier(
         getTvDetail: mockGetTvDetail,
-        getTvShowRecommendations: mockGetTvRecommendations,
+        getTvRecommendations: mockGetTvRecommendations,
         getWatchListStatus: mockGetWatchlistStatus,
         saveWatchlist: mockSaveWatchlist,
         removeWatchlist: mockRemoveWatchlist)

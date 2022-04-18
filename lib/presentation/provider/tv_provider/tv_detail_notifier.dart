@@ -16,14 +16,14 @@ class TvDetailNotifier extends ChangeNotifier {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final GetTvDetail getTvDetail;
-  final GetTvRecommendations getTvShowRecommendations;
+  final GetTvRecommendations getTvRecommendations;
   final GetWatchlistTvStatus getWatchListStatus;
   final SaveWatchlistTv saveWatchlist;
   final RemoveWatchlistTv removeWatchlist;
 
   TvDetailNotifier({
     required this.getTvDetail,
-    required this.getTvShowRecommendations,
+    required this.getTvRecommendations,
     required this.getWatchListStatus,
     required this.saveWatchlist,
     required this.removeWatchlist,
@@ -51,7 +51,7 @@ class TvDetailNotifier extends ChangeNotifier {
     _tvState = RequestState.Loading;
     notifyListeners();
     final detailResult = await getTvDetail.execute(id);
-    final recommendationResult = await getTvShowRecommendations.execute(id);
+    final recommendationResult = await getTvRecommendations.execute(id);
     detailResult.fold(
       (failure) {
         _tvState = RequestState.Error;
