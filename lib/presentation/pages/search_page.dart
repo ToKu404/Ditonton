@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
 import '../../common/state_enum.dart';
-import '../provider/movie_search_notifier.dart';
+import '../provider/movie_provider/movie_search_notifier.dart';
 import '../widgets/movie_card_list.dart';
 
 class SearchPage extends StatelessWidget {

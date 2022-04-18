@@ -20,7 +20,7 @@ void main() {
     when(mockTvRepository.saveWatchlistTv(testTvDetail))
         .thenAnswer((_) async => Right('Added to Watchlist'));
     // act
-    final result = await usecase(Params(tvDetail: testTvDetail));
+    final result = await usecase.execute(testTvDetail);
     // assert
     verify(mockTvRepository.saveWatchlistTv(testTvDetail));
     expect(result, Right('Added to Watchlist'));

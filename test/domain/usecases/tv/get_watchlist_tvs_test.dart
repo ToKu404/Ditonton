@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/usecase.dart';
 import 'package:ditonton/domain/usecases/tv_usecase/get_watchlist_tvs.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -23,7 +22,7 @@ void main() {
       (_) async => Right(testTvList),
     );
     //act
-    final result = await usecase(NoParams());
+    final result = await usecase.execute();
     //assert
     expect(result, Right(testTvList));
   });

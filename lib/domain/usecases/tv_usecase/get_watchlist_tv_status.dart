@@ -5,7 +5,7 @@ class GetWatchlistTvStatus {
 
   GetWatchlistTvStatus(this.repository);
 
-  Future<bool> call(int id) async {
+  Future<bool> execute(int id) async {
     return repository.isTvAddedToWatchlist(id);
   }
 }

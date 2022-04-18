@@ -13,12 +13,12 @@ import 'domain/usecases/movie_usecase/get_watchlist_status.dart';
 import 'domain/usecases/movie_usecase/remove_watchlist.dart';
 import 'domain/usecases/movie_usecase/save_watchlist.dart';
 import 'domain/usecases/movie_usecase/search_movies.dart';
-import 'presentation/provider/movie_detail_notifier.dart';
-import 'presentation/provider/movie_list_notifier.dart';
-import 'presentation/provider/movie_search_notifier.dart';
-import 'presentation/provider/popular_movies_notifier.dart';
-import 'presentation/provider/top_rated_movies_notifier.dart';
-import 'presentation/provider/watchlist_movie_notifier.dart';
+import 'presentation/provider/movie_provider/movie_detail_notifier.dart';
+import 'presentation/provider/movie_provider/movie_list_notifier.dart';
+import 'presentation/provider/movie_provider/movie_search_notifier.dart';
+import 'presentation/provider/movie_provider/popular_movies_notifier.dart';
+import 'presentation/provider/movie_provider/top_rated_movies_notifier.dart';
+import 'presentation/provider/movie_provider/watchlist_movie_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 

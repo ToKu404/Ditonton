@@ -7,7 +7,7 @@ import 'popular_movies_page.dart';
 import 'search_page.dart';
 import 'top_rated_movies_page.dart';
 import 'watchlist_movies_page.dart';
-import '../provider/movie_list_notifier.dart';
+import '../provider/movie_provider/movie_list_notifier.dart';
 import '../../common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -20,7 +20,7 @@ void main() {
     when(mockTvRepository.removeWatchlistTv(testTvDetail))
         .thenAnswer((_) async => Right('Removed from watchlist'));
     // act
-    final result = await usecase(Params(tvDetail: testTvDetail));
+    final result = await usecase.execute(testTvDetail);
     // assert
     verify(mockTvRepository.removeWatchlistTv(testTvDetail));
     expect(result, Right('Removed from watchlist'));

@@ -1,4 +1,10 @@
+import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/season_model.dart';
+import 'package:ditonton/data/models/tv_detail_model.dart';
+import 'package:ditonton/data/models/tv_model.dart';
+import 'package:ditonton/data/models/tv_response.dart';
+import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -63,26 +69,69 @@ final testMovieMap = {
 
 // Tv Dummy Object
 final testTv = Tv(
-    id: 62560,
-    posterPath: "/esN3gWb1P091xExLddD2nh4zmi3.jpg",
+    id: 31917,
+    posterPath: "/vC324sdfcS313vh9QXwijLIHPJp.jpg",
     name: "Pretty Little Liars",
-    overview:
-        "A contemporary and culturally resonant drama about a young programmer, Elliot, who suffers from a debilitating anti-social disorder and decides that he can only connect to people by hacking them. He wields his skills as a weapon to protect the people that he cares about. Elliot will find himself in the intersection between a cybersecurity firm he works for and the underworld organizations that are recruiting him to bring down corporate America.");
+    overview: "Overview");
+
+final testTvModel = TvModel(
+    id: 31917,
+    posterPath: "/vC324sdfcS313vh9QXwijLIHPJp.jpg",
+    name: "Pretty Little Liars",
+    overview: "Overview");
+
+final testTvDetailModel = TvDetailResponse(
+    backdropPath: "/54CU1a2Wod9RCSVQ9BT0nUw5Enr.jpg",
+    firstAirDate: "2004-01-12",
+    genres: [GenreModel(id: 18, name: "Drama")],
+    id: 1,
+    name: "Pride",
+    numberOfSeasons: 1,
+    overview: "Overview",
+    posterPath: "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
+    seasons: [
+      SeasonModel(
+          id: 2328126, seasonNumber: 1, name: "Season 1", posterPath: null)
+    ],
+    voteAverage: 8.5,
+    voteCount: 10);
 
 final testTvDetail = TvDetail(
     backdropPath: "/54CU1a2Wod9RCSVQ9BT0nUw5Enr.jpg",
     firstAirDate: "2004-01-12",
     genres: [Genre(id: 18, name: "Drama")],
-    id: 1130472,
-    name: "Pride Called Love",
+    id: 1,
+    name: "Pride",
     numberOfSeasons: 1,
-    overview:
-        "The theme is strength and gallantry.Haru Satonaka is the captain of an ice-hockey team, a star athlete who stakes everything on hockey but can only consider love as a game. Aki Murase is a woman who has been waiting for her lover who went abroad two years ago. These two persons start a relationship while frankly admitting to each other that it is only a love game. …The result is the unfolding of a drama of people with their respective pasts and with their pride as individuals.",
+    overview: "Overview",
     posterPath: "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
     seasons: [
       Season(id: 2328126, seasonNumber: 1, name: "Season 1", posterPath: null)
     ],
-    voteAverage: 0.0,
-    voteCount: 0);
+    voteAverage: 8.5,
+    voteCount: 10);
 
 final testTvList = [testTv];
+final testTvModelList = <TvModel>[testTvModel];
+final testTvResponseModel = TvResponse(tvList: <TvModel>[testTvModel]);
+
+final testTvTable = TvTable(
+  id: 1,
+  name: 'Pride',
+  posterPath: '/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg',
+  overview: 'Overview',
+);
+
+final testTvMap = {
+  'id': 1,
+  'overview': 'Overview',
+  'posterPath': '/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg',
+  'name': 'Pride',
+};
+
+final testWatchlistTv = Tv.watchlist(
+  id: 1,
+  name: 'Pride',
+  posterPath: '/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg',
+  overview: 'Overview',
+);

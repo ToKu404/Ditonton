@@ -22,7 +22,7 @@ void main() {
     when(mockTvRepository.getTvDetail(tId))
         .thenAnswer((_) async => Right(testTvDetail));
     //act
-    final result = await usecase(Params(id: tId));
+    final result = await usecase.execute(tId);
     //assert
     expect(result, Right(testTvDetail));
     verify(mockTvRepository.getTvDetail(tId));

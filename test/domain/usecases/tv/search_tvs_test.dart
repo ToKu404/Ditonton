@@ -23,7 +23,7 @@ void main() {
     when(mockTvRepository.searchTv(tQuery))
         .thenAnswer((_) async => Right(tTvs));
     //act
-    final result = await usecase(Params(query: tQuery));
+    final result = await usecase.execute(tQuery);
     //assert
     expect(result, Right(tTvs));
     verify(mockTvRepository.searchTv(tQuery));

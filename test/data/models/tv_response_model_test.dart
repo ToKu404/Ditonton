@@ -1,19 +1,12 @@
 import 'dart:convert';
 
-import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import '../../json_reader.dart';
 
 void main() {
-  final tTvModel = TvModel(
-      id: 31917,
-      posterPath: "/vC324sdfcS313vh9QXwijLIHPJp.jpg",
-      name: "Pretty Little Liars",
-      overview: "Overview");
-
-  final tTvResponseModel = TvResponse(tvList: <TvModel>[tTvModel]);
 
   group("fromJson", () {
     test('should return a valid model from Json', () async {
@@ -23,7 +16,7 @@ void main() {
       //act
       final result = TvResponse.fromJson(jsonMap);
       //assert
-      expect(result, tTvResponseModel);
+      expect(result, testTvResponseModel);
     });
   });
 
@@ -32,7 +25,7 @@ void main() {
       //arrange
 
       //act
-      final result = tTvResponseModel.toJson();
+      final result = testTvResponseModel.toJson();
       //assert
       final expectedJsonMap = {
         "results": [

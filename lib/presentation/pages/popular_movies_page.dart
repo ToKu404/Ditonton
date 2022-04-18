@@ -1,5 +1,5 @@
 import '../../common/state_enum.dart';
-import '../provider/popular_movies_notifier.dart';
+import '../provider/movie_provider/popular_movies_notifier.dart';
 import '../widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
