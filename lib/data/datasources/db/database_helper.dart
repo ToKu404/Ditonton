@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:sqflite/sqflite.dart';
+
 import '../../models/movie_table.dart';
 import '../../models/tv_table.dart';
 
@@ -21,7 +23,7 @@ class DatabaseHelper {
   }
 
   static const String _tblWatchlist = 'watchlist';
-  static const String _tblTvWatchlist = 'tvshow_watchlist';
+  static const String _tblTvWatchlist = 'tv_watchlist';
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();

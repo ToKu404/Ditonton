@@ -1,23 +1,24 @@
 import '../../common/state_enum.dart';
 import '../../common/utils.dart';
-import '../provider/movie_provider/watchlist_movie_notifier.dart';
-import '../widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WatchlistMoviesPage extends StatefulWidget {
+import '../provider/tv_provider/watchlist_tv_notifier.dart';
+import '../widgets/tv_card_list.dart';
+
+class WatchlistTvsPage extends StatefulWidget {
   @override
-  _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
+  _WatchlistTvsPageState createState() => _WatchlistTvsPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+class _WatchlistTvsPageState extends State<WatchlistTvsPage>
     with RouteAware {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
+        Provider.of<WatchlistTvNotifier>(context, listen: false)
+            .fetchWatchlistTvs());
   }
 
   @override
@@ -27,15 +28,15 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
+    Provider.of<WatchlistTvNotifier>(context, listen: false)
+        .fetchWatchlistTvs();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Consumer<WatchlistMovieNotifier>(
+      child: Consumer<WatchlistTvNotifier>(
         builder: (context, data, child) {
           if (data.watchlistState == RequestState.Loading) {
             return Center(
@@ -44,10 +45,10 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
           } else if (data.watchlistState == RequestState.Loaded) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final movie = data.watchlistMovies[index];
-                return MovieCard(movie);
+                final tvShow = data.watchlistTvs[index];
+                return TvCard(tvShow);
               },
-              itemCount: data.watchlistMovies.length,
+              itemCount: data.watchlistTvs.length,
             );
           } else {
             return Center(

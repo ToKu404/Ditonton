@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 import 'genre.dart';
 import 'season.dart';
-import 'package:equatable/equatable.dart';
 
 class TvDetail extends Equatable {
   String? backdropPath;

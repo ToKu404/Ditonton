@@ -1,8 +1,8 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/usecases/tv_usecase/get_watchlist_tvs.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv.dart';
+import '../../../domain/usecases/tv_usecase/get_watchlist_tvs.dart';
 
 class WatchlistTvNotifier extends ChangeNotifier {
   var _watchlistTvs = <Tv>[];

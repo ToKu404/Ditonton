@@ -1,6 +1,6 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv.dart';
 import '../../../domain/usecases/tv_usecase/get_top_rated_tvs.dart';
 

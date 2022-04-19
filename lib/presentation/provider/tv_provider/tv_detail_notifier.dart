@@ -1,9 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
-import 'package:ditonton/domain/usecases/tv_usecase/get_watchlist_tv_status.dart';
-import 'package:ditonton/domain/usecases/tv_usecase/remove_watchlist_tv.dart';
-import 'package:ditonton/domain/usecases/tv_usecase/save_watchlist_tv.dart';
+import '../../../common/state_enum.dart';
+import '../../../domain/entities/tv.dart';
+import '../../../domain/entities/tv_detail.dart';
+import '../../../domain/usecases/tv_usecase/get_watchlist_tv_status.dart';
+import '../../../domain/usecases/tv_usecase/remove_watchlist_tv.dart';
+import '../../../domain/usecases/tv_usecase/save_watchlist_tv.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -118,12 +118,3 @@ class TvDetailNotifier extends ChangeNotifier {
   }
 }
 
-class Params extends Equatable {
-  final int id;
-  final TvDetail tv;
-
-  Params(this.id, this.tv);
-
-  @override
-  List<Object?> get props => [id,];
-}

@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:ditonton/domain/entities/season.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/common/failure.dart';
+import '../../domain/entities/season.dart';
+import '../../domain/entities/tv_detail.dart';
+import '../../domain/entities/tv.dart';
+import '../../common/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/tv_season.dart';
-import 'package:ditonton/domain/repositories/tv_repository.dart';
+import '../../domain/entities/tv_season.dart';
+import '../../domain/repositories/tv_repository.dart';
 
 import '../../common/exception.dart';
 import '../datasources/tv_local_data_source.dart';
@@ -131,9 +131,15 @@ class TvRepositoryImpl implements TvRepository {
   }
 
   @override
-  Future<Either<Failure, List<TvSeason>>> getTvSeasons(
-      int tvId, List<Season> seasons) {
-    // TODO: implement getTvSeasons
-    throw UnimplementedError();
+  Future<Either<Failure, TvSeason>> getTvSeason(
+      int tvId, int seasonNumber) async {
+    try {
+      final result = await remoteDataSource.getTvSeason(tvId, seasonNumber);
+      return Right(result.toEntity());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    }
   }
 }

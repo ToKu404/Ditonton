@@ -1,16 +1,20 @@
+import 'package:ditonton/data/models/episode_model.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
+import 'package:ditonton/data/models/tv_season_model.dart';
 import 'package:ditonton/data/models/tv_table.dart';
+import 'package:ditonton/domain/entities/episode.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
+import 'package:ditonton/domain/entities/tv_season.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -91,7 +95,11 @@ final testTvDetailModel = TvDetailResponse(
     posterPath: "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
     seasons: [
       SeasonModel(
-          id: 2328126, seasonNumber: 1, name: "Season 1", posterPath: null)
+          id: 2328126,
+          seasonNumber: 1,
+          name: "Season 1",
+          airDate: "2012-10-12",
+          episodeCount: 12)
     ],
     voteAverage: 8.5,
     voteCount: 10);
@@ -106,7 +114,12 @@ final testTvDetail = TvDetail(
     overview: "Overview",
     posterPath: "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
     seasons: [
-      Season(id: 2328126, seasonNumber: 1, name: "Season 1", posterPath: null)
+      Season(
+          id: 2328126,
+          seasonNumber: 1,
+          name: "Season 1",
+          airDate: "2012-10-12",
+          episodeCount: 12)
     ],
     voteAverage: 8.5,
     voteCount: 10);
@@ -135,3 +148,24 @@ final testWatchlistTv = Tv.watchlist(
   posterPath: '/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg',
   overview: 'Overview',
 );
+
+
+
+    final testTvSeasonModel = TvSeasonModel(episodes: [
+      EpisodeModel(
+          episodeNumber: 1,
+          id: 1,
+          name: "Name",
+          overview: "Overview",
+          stillPath: "/test.jpg")
+    ], id: 1, name: "Name", seasonNumber: 1, overview: "Overview");
+    final testTvSeason = TvSeason(id: 1, seasonNumber: 1, name: "Name", episodes: [
+      Episode(
+          episodeNumber: 1,
+          id: 1,
+          name: "Name",
+          overview: "Overview",
+          stillPath: "/test.jpg")
+    ],
+    overview: "Overview"
+    );

@@ -1,8 +1,8 @@
-import 'package:ditonton/domain/usecases/tv_usecase/get_on_the_air_tvs.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/state_enum.dart';
 import '../../../domain/entities/tv.dart';
+import '../../../domain/usecases/tv_usecase/get_on_the_air_tvs.dart';
 
 class OnTheAirTvsNotifier extends ChangeNotifier {
   final GetOnTheAirTvs getOnTheAirTvs;

@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/constants.dart';
-import '../../domain/entities/movie.dart';
-import '../pages/movie_detail_page.dart';
+import '../../domain/entities/tv.dart';
+import '../pages/tv_detail_page.dart';
 
-class MovieCard extends StatelessWidget {
-  final Movie movie;
+class TvCard extends StatelessWidget {
+  final Tv tv;
 
-  MovieCard(this.movie);
+  TvCard(this.tv);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,11 @@ class MovieCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         onTap: () {
+          print(tv.id);
           Navigator.pushNamed(
             context,
-            MovieDetailPage.ROUTE_NAME,
-            arguments: movie.id,
+            TvDetailPage.ROUTE_NAME,
+            arguments: tv.id,
           );
         },
         child: Stack(
@@ -27,6 +28,7 @@ class MovieCard extends StatelessWidget {
           children: [
             Card(
               child: Container(
+                width: double.infinity,
                 margin: const EdgeInsets.only(
                   left: 16 + 80 + 16,
                   bottom: 8,
@@ -36,14 +38,14 @@ class MovieCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title ?? '-',
+                      tv.name ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      movie.overview ?? '-',
+                      tv.overview ?? '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -58,7 +60,7 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),

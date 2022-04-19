@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../common/constants.dart';
 import '../../domain/entities/movie.dart';
-import 'about_page.dart';
+import '../widgets/custom_drawer.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
 import 'search_page.dart';
 import 'top_rated_movies_page.dart';
-import 'watchlist_movies_page.dart';
 import '../provider/movie_provider/movie_list_notifier.dart';
 import '../../common/state_enum.dart';
 import 'package:flutter/material.dart';
@@ -31,46 +30,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
-              ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
-            ),
-            ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
-              onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
-              },
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
-              },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       appBar: AppBar(
         title: Text('Ditonton'),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SearchPage.ROUTE_NAME,
+                  arguments: true);
             },
             icon: Icon(Icons.search),
           )

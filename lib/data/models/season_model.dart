@@ -1,29 +1,34 @@
-import 'package:ditonton/domain/entities/season.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../domain/entities/season.dart';
 
 class SeasonModel extends Equatable {
   final int id;
   final int seasonNumber;
   final String name;
-  final String? posterPath;
+  final String? airDate;
+  final int episodeCount;
 
   SeasonModel(
       {required this.id,
       required this.seasonNumber,
       required this.name,
-      required this.posterPath});
+      required this.airDate,
+      required this.episodeCount});
 
   factory SeasonModel.fromJson(Map<String, dynamic> json) => SeasonModel(
       id: json["id"],
       seasonNumber: json["season_number"],
       name: json["name"],
-      posterPath: json["poster_path"]);
+      airDate: json["air_date"],
+      episodeCount: json["episode_count"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "season_number": seasonNumber,
         "name": name,
-        "poster_path": posterPath,
+        "air_date": airDate,
+        "episode_count": episodeCount,
       };
 
   Season toEntity() {
@@ -31,9 +36,10 @@ class SeasonModel extends Equatable {
         id: this.id,
         seasonNumber: this.seasonNumber,
         name: this.name,
-        posterPath: this.posterPath);
+        airDate: this.airDate,
+        episodeCount: this.episodeCount);
   }
 
   @override
-  List<Object?> get props => [id, seasonNumber, name, posterPath];
+  List<Object?> get props => [id, seasonNumber, name, airDate, episodeCount];
 }

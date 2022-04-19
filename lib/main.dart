@@ -1,12 +1,21 @@
+import 'presentation/pages/tv_season_page.dart';
+import 'presentation/provider/tv_provider/popular_tvs_notifier.dart';
+import 'presentation/provider/tv_provider/top_rated_tvs_notifier.dart';
+
 import 'common/constants.dart';
 import 'common/utils.dart';
 import 'presentation/pages/about_page.dart';
+import 'presentation/pages/home_tv_page.dart';
 import 'presentation/pages/movie_detail_page.dart';
 import 'presentation/pages/home_movie_page.dart';
+import 'presentation/pages/on_the_air_tvs_page.dart';
 import 'presentation/pages/popular_movies_page.dart';
+import 'presentation/pages/popular_tvs_page.dart';
 import 'presentation/pages/search_page.dart';
 import 'presentation/pages/top_rated_movies_page.dart';
-import 'presentation/pages/watchlist_movies_page.dart';
+import 'presentation/pages/top_rated_tvs_page.dart';
+import 'presentation/pages/tv_detail_page.dart';
+import 'presentation/pages/watchlist_page.dart';
 import 'presentation/provider/movie_provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_provider/movie_list_notifier.dart';
 import 'presentation/provider/movie_provider/movie_search_notifier.dart';
@@ -17,6 +26,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'injection.dart' as di;
+import 'presentation/provider/tv_provider/on_the_air_tvs_notifier.dart';
+import 'presentation/provider/tv_provider/tv_detail_notifier.dart';
+import 'presentation/provider/tv_provider/tv_list_notifier.dart';
+import 'presentation/provider/tv_provider/tv_search_notifier.dart';
+import 'presentation/provider/tv_provider/tv_season_notifier.dart';
+import 'presentation/provider/tv_provider/watchlist_tv_notifier.dart';
 
 void main() {
   di.init();
@@ -46,6 +61,30 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<OnTheAirTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<PopularTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TopRatedTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSearchNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<WatchlistTvNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeasonNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -72,11 +111,37 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             case SearchPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => SearchPage());
-            case WatchlistMoviesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
+              final isMovie = settings.arguments as bool;
+              return CupertinoPageRoute(
+                  builder: (_) => SearchPage(
+                        isMovie: isMovie,
+                      ));
+            case WatchlistPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => WatchlistPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
+            case HomeTvPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => HomeTvPage());
+            case TvDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => TvDetailPage(id: id),
+                settings: settings,
+              );
+            case OnTheAirTvsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => OnTheAirTvsPage());
+            case PopularTvsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvsPage());
+            case TopRatedTvsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvsPage());
+            case TvSeasonPage.ROUTE_NAME:
+              TvSeasonArguments arguments =
+                  settings.arguments as TvSeasonArguments;
+              return CupertinoPageRoute(
+                  builder: (_) => TvSeasonPage(
+                        id: arguments.id,
+                        seasonNumber: arguments.seasonNumber,
+                      ));
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

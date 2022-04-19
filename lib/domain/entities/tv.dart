@@ -4,7 +4,7 @@ class Tv extends Equatable {
   String? posterPath;
   int id;
   String? name;
-  String overview;
+  String? overview;
 
   Tv({
     required this.id,
