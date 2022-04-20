@@ -1,7 +1,6 @@
 import 'dart:convert';
 import '../../common/exception.dart';
 import '../models/tv_season_model.dart';
-import '../../domain/entities/tv_season.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/tv_detail_model.dart';

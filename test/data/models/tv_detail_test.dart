@@ -7,7 +7,6 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../json_reader.dart';
 
 void main() {
-
   group("toEntity", () {
     test('should be TvDetail Model subclass of TvDetail Entity', () async {
       final result = testTvDetailModel.toEntity();
@@ -46,8 +45,9 @@ void main() {
           {
             "id": 2328126,
             "name": "Season 1",
-            "poster_path": null,
-            "season_number": 1
+            "season_number": 1,
+            'air_date': '2012-10-12',
+            'episode_count': 12
           }
         ],
         "vote_average": 8.5,

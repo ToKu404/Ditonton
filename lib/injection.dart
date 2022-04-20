@@ -13,7 +13,7 @@ import 'data/datasources/db/database_helper.dart';
 import 'data/datasources/movie_local_data_source.dart';
 import 'data/datasources/movie_remote_data_source.dart';
 import 'data/datasources/tv_local_data_source.dart';
-import 'data/datasources/tv_remote_date_source.dart';
+import 'data/datasources/tv_remote_data_source.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'data/repositories/tv_repository_impl.dart';
 import 'domain/repositories/movie_repository.dart';

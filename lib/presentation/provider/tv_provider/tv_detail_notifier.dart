@@ -4,7 +4,6 @@ import '../../../domain/entities/tv_detail.dart';
 import '../../../domain/usecases/tv_usecase/get_watchlist_tv_status.dart';
 import '../../../domain/usecases/tv_usecase/remove_watchlist_tv.dart';
 import '../../../domain/usecases/tv_usecase/save_watchlist_tv.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

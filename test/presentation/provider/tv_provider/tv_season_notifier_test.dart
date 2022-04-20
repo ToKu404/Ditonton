@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/usecases/tv_usecase/get_tv_season.dart';
 import 'package:ditonton/presentation/provider/tv_provider/tv_season_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';

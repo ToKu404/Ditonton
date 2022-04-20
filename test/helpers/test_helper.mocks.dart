@@ -13,7 +13,7 @@ import 'package:ditonton/data/datasources/movie_local_data_source.dart' as _i14;
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart'
     as _i12;
 import 'package:ditonton/data/datasources/tv_local_data_source.dart' as _i25;
-import 'package:ditonton/data/datasources/tv_remote_date_source.dart' as _i23;
+import 'package:ditonton/data/datasources/tv_remote_data_source.dart' as _i23;
 import 'package:ditonton/data/models/movie_detail_model.dart' as _i3;
 import 'package:ditonton/data/models/movie_model.dart' as _i13;
 import 'package:ditonton/data/models/movie_table.dart' as _i15;

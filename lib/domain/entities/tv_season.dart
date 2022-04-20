@@ -5,7 +5,6 @@ class TvSeason extends Equatable {
   int id;
   int seasonNumber;
   String? name;
-  String overview;
   List<Episode> episodes;
 
   TvSeason({
@@ -13,9 +12,8 @@ class TvSeason extends Equatable {
     required this.seasonNumber,
     required this.name,
     required this.episodes,
-    required this.overview,
   });
 
   @override
-  List<Object?> get props => [id, seasonNumber, name, episodes, overview];
+  List<Object?> get props => [id, seasonNumber, name, episodes];
 }

@@ -7,20 +7,13 @@ class Episode extends Equatable {
   String overview;
   String? stillPath;
 
-  Episode({
-    required this.episodeNumber,
-    required this.id,
-    required this.name,
-    required this.overview,
-    required this.stillPath
-  });
+  Episode(
+      {required this.episodeNumber,
+      required this.id,
+      required this.name,
+      required this.overview,
+      required this.stillPath});
 
   @override
-  List<Object?> get props => [
-    episodeNumber,
-    id,
-    name,
-    overview,
-    stillPath
-  ];
+  List<Object?> get props => [episodeNumber, id, name, overview, stillPath];
 }

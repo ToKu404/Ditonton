@@ -158,7 +158,7 @@ final testWatchlistTv = Tv.watchlist(
           name: "Name",
           overview: "Overview",
           stillPath: "/test.jpg")
-    ], id: 1, name: "Name", seasonNumber: 1, overview: "Overview");
+    ], id: 1, name: "Name", seasonNumber: 1, );
     final testTvSeason = TvSeason(id: 1, seasonNumber: 1, name: "Name", episodes: [
       Episode(
           episodeNumber: 1,
@@ -167,5 +167,5 @@ final testWatchlistTv = Tv.watchlist(
           overview: "Overview",
           stillPath: "/test.jpg")
     ],
-    overview: "Overview"
+
     );

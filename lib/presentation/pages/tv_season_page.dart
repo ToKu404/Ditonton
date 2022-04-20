@@ -75,9 +75,15 @@ class _TvSeasonPageState extends State<TvSeasonPage> {
                       }),
                     ),
                     isOnGoing
-                        ? Text(
-                            "On Going...",
-                            style: kSubtitle,
+                        ? Container(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            padding: EdgeInsets.all(6),
+                            color: Colors.white10,
+                            child: Text(
+                              "On Going...",
+                              style: kSubtitle,
+                            ),
                           )
                         : Container()
                   ],

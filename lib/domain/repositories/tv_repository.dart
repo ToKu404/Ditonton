@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import '../entities/season.dart';
 import '../entities/tv_season.dart';
 import '../../common/failure.dart';
 import '../entities/tv.dart';

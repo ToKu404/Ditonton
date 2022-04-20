@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import '../../domain/entities/season.dart';
 import '../../domain/entities/tv_detail.dart';
 import '../../domain/entities/tv.dart';
 import '../../common/failure.dart';
@@ -10,7 +9,7 @@ import '../../domain/repositories/tv_repository.dart';
 
 import '../../common/exception.dart';
 import '../datasources/tv_local_data_source.dart';
-import '../datasources/tv_remote_date_source.dart';
+import '../datasources/tv_remote_data_source.dart';
 import '../models/tv_table.dart';
 
 class TvRepositoryImpl implements TvRepository {

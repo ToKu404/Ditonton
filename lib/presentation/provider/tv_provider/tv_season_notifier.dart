@@ -2,7 +2,6 @@ import '../../../domain/entities/tv_season.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../common/state_enum.dart';
-import '../../../domain/entities/season.dart';
 import '../../../domain/usecases/tv_usecase/get_tv_season.dart';
 
 class TvSeasonNotifier extends ChangeNotifier {
