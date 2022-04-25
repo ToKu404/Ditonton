@@ -1,3 +1,6 @@
+import 'package:ditonton/presentation/bloc/movie_bloc/movie_search_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../common/constants.dart';
 import '../../common/state_enum.dart';
 import '../provider/movie_provider/movie_search_notifier.dart';
@@ -28,8 +31,9 @@ class SearchPage extends StatelessWidget {
             isMovie
                 ? TextField(
                     onSubmitted: (query) {
-                      Provider.of<MovieSearchNotifier>(context, listen: false)
-                          .fetchMovieSearch(query);
+                      context
+                          .read<MovieSearchBloc>()
+                          .add(OnQueryChanged(query));
                     },
                     decoration: InputDecoration(
                       hintText: 'Search title',
@@ -63,22 +67,28 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildMoviesResult() {
-    return Consumer<MovieSearchNotifier>(
-      builder: (context, data, child) {
-        if (data.state == RequestState.Loading) {
+    return BlocBuilder<MovieSearchBloc, MovieSearchState>(
+      builder: (context, state) {
+        if (state is MovieSearchLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (data.state == RequestState.Loaded) {
-          final result = data.searchResult;
+        } else if (state is MovieSearchHasData) {
+          final result = state.result;
           return Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(8),
               itemBuilder: (context, index) {
-                final movie = data.searchResult[index];
+                final movie = state.result[index];
                 return MovieCard(movie);
               },
               itemCount: result.length,
+            ),
+          );
+        } else if (state is MovieSearchError) {
+          return Expanded(
+            child: Center(
+              child: Text(state.message),
             ),
           );
         } else {

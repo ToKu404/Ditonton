@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'presentation/bloc/movie_bloc/movie_search_bloc.dart';
 import 'presentation/pages/tv_season_page.dart';
 import 'presentation/provider/tv_provider/popular_tvs_notifier.dart';
 import 'presentation/provider/tv_provider/top_rated_tvs_notifier.dart';
@@ -84,6 +87,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeasonNotifier>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieSearchBloc>(),
         ),
       ],
       child: MaterialApp(
