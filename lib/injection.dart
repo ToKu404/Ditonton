@@ -1,4 +1,4 @@
-import 'package:ditonton/presentation/bloc/movie_bloc/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
 
 import 'domain/usecases/tv_usecase/get_tv_season.dart';
 import 'domain/usecases/tv_usecase/remove_watchlist_tv.dart';

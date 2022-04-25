@@ -1,4 +1,4 @@
-import 'package:ditonton/presentation/bloc/movie_bloc/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/constants.dart';
