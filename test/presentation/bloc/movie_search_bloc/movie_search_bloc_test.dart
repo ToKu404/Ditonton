@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/movie_usecase/search_movies.dart';
 import 'package:ditonton/presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,6 +38,25 @@ void main() {
     expect: () => [
       MovieSearchLoading(),
       MovieSearchHasData(testMovieList),
+    ],
+    verify: (bloc) {
+      verify(mockSearchMovies.execute(tQuery));
+    },
+  );
+
+  blocTest<MovieSearchBloc, MovieSearchState>(
+    'Should emit [Loading, HasData, Empty] when data is gotten successfully but data is empty',
+    build: () {
+      when(mockSearchMovies.execute(tQuery))
+          .thenAnswer((_) async => Right(<Movie>[]));
+      return searchBloc;
+    },
+    act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      MovieSearchLoading(),
+      MovieSearchHasData(<Movie>[]),
+      MovieSearchEmpty(),
     ],
     verify: (bloc) {
       verify(mockSearchMovies.execute(tQuery));

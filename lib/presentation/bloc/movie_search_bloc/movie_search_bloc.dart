@@ -24,12 +24,14 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
 
         result.fold(
           (failure) => emit(MovieSearchError(failure.message)),
-          (data) => emit(MovieSearchHasData(data)),
+          (data) {
+            emit(MovieSearchHasData(data));
+            if (data.isEmpty) {
+              emit(MovieSearchEmpty());
+            }
+          },
         );
       }),
-      transformer: debounce(
-        const Duration(milliseconds: 100),
-      ),
     );
   }
 }

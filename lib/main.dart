@@ -1,6 +1,12 @@
+import 'package:ditonton/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
+import 'presentation/bloc/now_playing_movies_bloc/now_playing_movies_bloc.dart';
+import 'presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
+import 'presentation/bloc/top_rated_movies_bloc/top_rated_movies_bloc.dart';
+import 'presentation/bloc/watchlist_movie_bloc/watchlist_movie_bloc.dart';
 import 'presentation/pages/tv_season_page.dart';
 import 'presentation/provider/tv_provider/popular_tvs_notifier.dart';
 import 'presentation/provider/tv_provider/top_rated_tvs_notifier.dart';
@@ -19,12 +25,6 @@ import 'presentation/pages/top_rated_movies_page.dart';
 import 'presentation/pages/top_rated_tvs_page.dart';
 import 'presentation/pages/tv_detail_page.dart';
 import 'presentation/pages/watchlist_page.dart';
-import 'presentation/provider/movie_provider/movie_detail_notifier.dart';
-import 'presentation/provider/movie_provider/movie_list_notifier.dart';
-import 'presentation/provider/movie_provider/movie_search_notifier.dart';
-import 'presentation/provider/movie_provider/popular_movies_notifier.dart';
-import 'presentation/provider/movie_provider/top_rated_movies_notifier.dart';
-import 'presentation/provider/movie_provider/watchlist_movie_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,24 +46,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvListNotifier>(),
         ),
@@ -90,6 +72,24 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<MovieSearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMovieBloc>(),
         ),
       ],
       child: MaterialApp(
