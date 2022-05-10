@@ -9,6 +9,7 @@ import 'domain/usecases/tv_usecase/get_tv_season.dart';
 import 'domain/usecases/tv_usecase/remove_watchlist_tv.dart';
 import 'domain/usecases/tv_usecase/save_watchlist_tv.dart';
 import 'presentation/bloc/top_rated_movies_bloc/top_rated_movies_bloc.dart';
+import 'presentation/bloc/tv_search_bloc/tv_search_bloc.dart';
 import 'presentation/provider/tv_provider/on_the_air_tvs_notifier.dart';
 import 'presentation/provider/tv_provider/popular_tvs_notifier.dart';
 import 'presentation/provider/tv_provider/top_rated_tvs_notifier.dart';
@@ -70,9 +71,6 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvSearchNotifier(searchTvs: locator()),
-  );
-  locator.registerFactory(
     () => OnTheAirTvsNotifier(
       getOnTheAirTvs: locator(),
     ),
@@ -100,6 +98,11 @@ void init() {
 
   locator.registerFactory(
     () => MovieSearchBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TvSearchBloc(
       locator(),
     ),
   );

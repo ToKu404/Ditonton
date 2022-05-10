@@ -10,7 +10,8 @@ abstract class MovieSearchState extends Equatable {
 class MovieSearchEmpty extends MovieSearchState {}
  
 class MovieSearchLoading extends MovieSearchState {}
- 
+
+
 class MovieSearchError extends MovieSearchState {
   final String message;
  

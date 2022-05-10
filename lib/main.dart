@@ -6,17 +6,16 @@ import 'presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'presentation/bloc/now_playing_movies_bloc/now_playing_movies_bloc.dart';
 import 'presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
 import 'presentation/bloc/top_rated_movies_bloc/top_rated_movies_bloc.dart';
+import 'presentation/bloc/tv_search_bloc/tv_search_bloc.dart';
 import 'presentation/bloc/watchlist_movie_bloc/watchlist_movie_bloc.dart';
+import 'presentation/pages/home_page.dart';
 import 'presentation/pages/tv_season_page.dart';
 import 'presentation/provider/tv_provider/popular_tvs_notifier.dart';
 import 'presentation/provider/tv_provider/top_rated_tvs_notifier.dart';
 
 import 'common/constants.dart';
 import 'common/utils.dart';
-import 'presentation/pages/about_page.dart';
-import 'presentation/pages/home_tv_page.dart';
 import 'presentation/pages/movie_detail_page.dart';
-import 'presentation/pages/home_movie_page.dart';
 import 'presentation/pages/on_the_air_tvs_page.dart';
 import 'presentation/pages/popular_movies_page.dart';
 import 'presentation/pages/popular_tvs_page.dart';
@@ -62,9 +61,6 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TvDetailNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -72,6 +68,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<MovieSearchBloc>(),
+        ),
+         BlocProvider(
+          create: (_) => di.locator<TvSearchBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<MovieDetailBloc>(),
@@ -93,6 +92,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
@@ -100,12 +100,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomeMoviePage(),
+        home: HomePage(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case '/home':
-              return MaterialPageRoute(builder: (_) => HomeMoviePage());
+            case HomePage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => HomePage());
             case PopularMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:
@@ -116,18 +116,10 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case SearchPage.ROUTE_NAME:
-              final isMovie = settings.arguments as bool;
-              return CupertinoPageRoute(
-                  builder: (_) => SearchPage(
-                        isMovie: isMovie,
-                      ));
             case WatchlistPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistPage());
-            case AboutPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => AboutPage());
-            case HomeTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => HomeTvPage());
+            case SearchPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => SearchPage());
             case TvDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return MaterialPageRoute(

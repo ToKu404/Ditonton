@@ -55,7 +55,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         },
         child: BlocBuilder<MovieDetailBloc, MovieDetailState>(
           builder: ((context, state) {
-            if (state is MovieDetailEmpty) {
+            if (state is MovieDetailLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
