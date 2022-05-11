@@ -1,12 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/presentation/bloc/on_the_air_tvs_bloc/on_the_air_tvs_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular_tvs_bloc/popular_tvs_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_tvs_bloc/top_rated_tvs_bloc.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/tv_card_list.dart';
+import '../widgets/tv_card_horizontal.dart';
 import 'top_rated_tvs_page.dart';
-import 'tv_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/constants.dart';
@@ -160,6 +158,7 @@ class TvList extends StatelessWidget {
     return Container(
       height: 170,
       child: ListView.builder(
+        padding: EdgeInsets.only(left: 8),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final tv = tvs[index];

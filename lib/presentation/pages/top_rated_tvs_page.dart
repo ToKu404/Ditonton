@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import '../bloc/top_rated_tvs_bloc/top_rated_tvs_bloc.dart';
-import '../widgets/tv_card_grid.dart';
+import '../widgets/tv_card_vertical.dart';
 
 class TopRatedTvsPage extends StatefulWidget {
   static const ROUTE_NAME = '/top-rated-tvs';

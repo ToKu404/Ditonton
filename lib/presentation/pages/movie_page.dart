@@ -6,7 +6,7 @@ import '../../common/constants.dart';
 import '../../domain/entities/movie.dart';
 import '../bloc/popular_movies_bloc/popular_movies_bloc.dart';
 import '../bloc/top_rated_movies_bloc/top_rated_movies_bloc.dart';
-import '../widgets/movie_card_list.dart';
+import '../widgets/movie_card_horizontal.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
 import 'top_rated_movies_page.dart';
@@ -159,6 +159,7 @@ class MovieList extends StatelessWidget {
     return Container(
       height: 170,
       child: ListView.builder(
+        padding: EdgeInsets.only(left: 8),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
@@ -169,4 +170,3 @@ class MovieList extends StatelessWidget {
     );
   }
 }
-

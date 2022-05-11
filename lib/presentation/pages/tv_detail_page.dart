@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/presentation/widgets/tv_card_list.dart';
+import 'package:ditonton/presentation/widgets/tv_card_horizontal.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:readmore/readmore.dart';
 import '../../common/constants.dart';
 import '../../domain/entities/genre.dart';
 import '../bloc/tv_detail_bloc/tv_detail_bloc.dart';
@@ -47,12 +49,13 @@ class _TvDetailPageState extends State<TvDetailPage> {
           if (state is SuccessAddOrRemoveWatchlist) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(state.message),
-              duration: Duration(seconds: 5),
+              backgroundColor: kMikadoYellow,
+              duration: Duration(seconds: 1),
             ));
           } else if (state is FailedAddOrRemoveWatchlist) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(state.message),
-              duration: Duration(seconds: 2),
+              duration: Duration(seconds: 1),
             ));
           }
         },
@@ -80,7 +83,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
   }
 }
 
-class DetailContent extends StatefulWidget {
+class DetailContent extends StatelessWidget {
   final TvDetail tv;
   final List<Tv> recommendations;
   final bool isAddedWatchlist;
@@ -88,10 +91,298 @@ class DetailContent extends StatefulWidget {
   DetailContent(this.tv, this.recommendations, this.isAddedWatchlist);
 
   @override
-  State<DetailContent> createState() => _DetailContentState();
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Column(
+      children: [
+        Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(EvaIcons.arrowBack)),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    right: 16.0, top: 8, bottom: 8, left: 8),
+                child: Text(
+                  tv.name,
+                  maxLines: 2,
+                  style: kHeading5,
+                ),
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Stack(
+                children: [
+                  CachedNetworkImage(
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w400${(tv.backdropPath != null) ? tv.backdropPath : tv.posterPath}',
+                    width: screenWidth,
+                    height: 200,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  Container(
+                    width: screenWidth,
+                    height: 200,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [kRichBlack, Colors.transparent],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter)),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 140, left: 16, right: 16),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                            width: 80,
+                            height: 120,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 200 - 160),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _showYear(tv.firstAirDate),
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey),
+                                ),
+                                Text(
+                                  tv.name,
+                                  style: kHeading6,
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                Row(
+                                  children: [
+                                    RatingBarIndicator(
+                                      rating: tv.voteAverage / 2,
+                                      itemCount: 5,
+                                      itemBuilder: (context, index) => Icon(
+                                        Icons.star,
+                                        color: kMikadoYellow,
+                                      ),
+                                      itemSize: 18,
+                                    ),
+                                    SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      '${tv.voteAverage}',
+                                      style: TextStyle(color: kMikadoYellow),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: InkWell(
+                  onTap: () async {
+                    if (!isAddedWatchlist) {
+                      BlocProvider.of<TvWatchlistBloc>(context, listen: false)
+                        ..add(AddToWatchlist(tv));
+                    } else {
+                      BlocProvider.of<TvWatchlistBloc>(context, listen: false)
+                        ..add(RemoveFromWatchList(tv));
+                    }
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8), color: kGrey),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        isAddedWatchlist
+                            ? Icon(
+                                EvaIcons.checkmark,
+                                size: 16,
+                                color: kMikadoYellow,
+                              )
+                            : Icon(
+                                EvaIcons.plus,
+                                size: 16,
+                                color: kWhite,
+                              ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text('Watchlist'),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Genre',
+                  style: kSubtitle,
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              SizedBox(
+                height: 25,
+                child: ListView(
+                  padding: EdgeInsets.only(left: 16),
+                  scrollDirection: Axis.horizontal,
+                  children: tv.genres
+                      .map(
+                        (genre) => Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(width: 1, color: kGrey),
+                              color: kRichBlack),
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          margin: EdgeInsets.only(right: 6),
+                          child: Center(
+                            child: Text(
+                              genre.name,
+                              style: TextStyle(fontSize: 12, height: 1),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Description',
+                  style: kSubtitle,
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: ReadMoreText(
+                  tv.overview,
+                  trimLines: 3,
+                  trimMode: TrimMode.Line,
+                  colorClickableText: kWhite,
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              (tv.seasons.length == 1)
+                  ? Container()
+                  : Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Seasons',
+                        style: kSubtitle,
+                      ),
+                    ),
+              SeasonContent(tv),
+              SizedBox(
+                height: 16,
+              ),
+              (recommendations.length == 0)
+                  ? Container()
+                  : Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Similar Movies',
+                        style: kSubtitle,
+                      ),
+                    ),
+              SizedBox(
+                height: 8,
+              ),
+              (recommendations.length == 0)
+                  ? Container()
+                  : Container(
+                      height: 150,
+                      child: ListView.builder(
+                        padding: EdgeInsets.only(left: 16),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final tv = recommendations[index];
+                          return TvCardList(tv: tv);
+                        },
+                        itemCount: recommendations.length,
+                      ),
+                    ),
+              SizedBox(
+                height: 16,
+              ),
+            ]),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _showYear(String? date) {
+    final String? year = date == null ? "" : date.substring(0, 4);
+    return "$year";
+  }
 }
 
-class _DetailContentState extends State<DetailContent> {
+class SeasonContent extends StatefulWidget {
+  final TvDetail tv;
+  const SeasonContent(this.tv);
+
+  @override
+  State<SeasonContent> createState() => _SeasonContentState();
+}
+
+class _SeasonContentState extends State<SeasonContent> {
   int _selectIndex = 0;
 
   @override
@@ -103,266 +394,86 @@ class _DetailContentState extends State<DetailContent> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tv.posterPath}',
-          width: screenWidth,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 48 + 8),
-          child: DraggableScrollableSheet(
-            builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: kRichBlack,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                ),
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  right: 16,
-                ),
-                child: Stack(
+        SizedBox(
+          height: 40.0,
+          child: ListView.builder(
+            padding: EdgeInsets.only(left: 16),
+            physics: ClampingScrollPhysics(),
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: widget.tv.seasons.length,
+            itemBuilder: (BuildContext context, int index) => InkWell(
+              onTap: () {
+                setState(() {
+                  _selectIndex = index;
+                  BlocProvider.of<TvSeasonBloc>(context, listen: false)
+                    ..add(FetchTvSeason(
+                        widget.tv.id, widget.tv.seasons[index].seasonNumber));
+                });
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 6),
+                height: 40,
+                margin: EdgeInsets.only(right: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.tv.name,
-                              style: kHeading5,
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (!widget.isAddedWatchlist) {
-                                  BlocProvider.of<TvWatchlistBloc>(context,
-                                      listen: false)
-                                    ..add(AddToWatchlist(widget.tv));
-                                } else {
-                                  BlocProvider.of<TvWatchlistBloc>(context,
-                                      listen: false)
-                                    ..add(RemoveFromWatchList(widget.tv));
-                                }
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  widget.isAddedWatchlist
-                                      ? Icon(Icons.check)
-                                      : Icon(Icons.add),
-                                  Text('Watchlist'),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              _showGenres(widget.tv.genres),
-                            ),
-                            Text(
-                              _showYear(widget.tv.firstAirDate) +
-                                  "• ${widget.tv.numberOfSeasons} season",
-                            ),
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: widget.tv.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
-                                ),
-                                Text('${widget.tv.voteAverage}')
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Overview',
-                              style: kHeading6,
-                            ),
-                            Text(
-                              widget.tv.overview,
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Seasons',
-                              style: kHeading6,
-                            ),
-                            SizedBox(
-                              height: 40.0,
-                              child: ListView.builder(
-                                physics: ClampingScrollPhysics(),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: widget.tv.seasons.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) =>
-                                        InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectIndex = index;
-                                      BlocProvider.of<TvSeasonBloc>(context,
-                                          listen: false)
-                                        ..add(FetchTvSeason(
-                                            widget.tv.id,
-                                            widget.tv.seasons[index]
-                                                .seasonNumber));
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(6),
-                                    height: 40,
-                                    margin: EdgeInsets.only(right: 8),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Season ${widget.tv.seasons[index].seasonNumber}',
-                                          style: TextStyle(
-                                              color: (_selectIndex == index)
-                                                  ? kWhite
-                                                  : kDavysGrey),
-                                        ),
-                                        (_selectIndex == index)
-                                            ? Container(
-                                                height: 4,
-                                                width: 12,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
-                                                    color: kMikadoYellow),
-                                              )
-                                            : Container(),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Container(
-                              height: 146.0,
-                              child: BlocBuilder<TvSeasonBloc, TvSeasonState>(
-                                builder: ((context, state) {
-                                  if (state is TvSeasonLoading) {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  } else if (state is TvSeasonHasData) {
-                                    List eps = state.tvSeason.episodes
-                                        .where((e) =>
-                                            e.overview != "" ||
-                                            e.stillPath != null)
-                                        .toList();
-                                    // final eps = state.tvSeason.episodes;
-                                    return ListView.builder(
-                                        physics: ClampingScrollPhysics(),
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: eps.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) =>
-                                                EpisodeCard(eps: eps[index]));
-                                  } else if (state is TvSeasonError) {
-                                    return Text(state.messsage);
-                                  } else {
-                                    return Container();
-                                  }
-                                }),
-                              ),
-                            ),
-                            // SizedBox(
-                            //   height: 16,
-                            // ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.recommendations.isEmpty
-                                      ? ""
-                                      : 'Recommendations',
-                                  style: kHeading6,
-                                ),
-                                Container(
-                                  height: 150,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      final tv = widget.recommendations[index];
-                                      return TvCardList(tv: tv);
-                                    },
-                                    itemCount: widget.recommendations.length,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    Text(
+                      'Season ${widget.tv.seasons[index].seasonNumber}',
+                      style: TextStyle(
+                          color: (_selectIndex == index) ? kWhite : kDavysGrey),
                     ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        color: Colors.white,
-                        height: 4,
-                        width: 48,
-                      ),
-                    ),
+                    (_selectIndex == index)
+                        ? Container(
+                            height: 4,
+                            width: 12,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: kMikadoYellow),
+                          )
+                        : Container(),
                   ],
                 ),
-              );
-            },
-            // initialChildSize: 0.5,
-            minChildSize: 0.25,
-            // maxChildSize: 1.0,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: kRichBlack,
-            foregroundColor: Colors.white,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              ),
             ),
           ),
-        )
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Container(
+          height: 100.0,
+          child: BlocBuilder<TvSeasonBloc, TvSeasonState>(
+            builder: ((context, state) {
+              if (state is TvSeasonLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is TvSeasonHasData) {
+                List eps = state.tvSeason.episodes
+                    .where((e) => e.overview != "" || e.stillPath != null)
+                    .toList();
+                // final eps = state.tvSeason.episodes;
+                return ListView.builder(
+                    padding: EdgeInsets.only(left: 16),
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: eps.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        EpisodeCard(eps: eps[index]));
+              } else if (state is TvSeasonError) {
+                return Text(state.messsage);
+              } else {
+                return Container();
+              }
+            }),
+          ),
+        ),
       ],
     );
-  }
-
-  String _showGenres(List<Genre> genres) {
-    String result = '';
-    for (var genre in genres) {
-      result += genre.name + ', ';
-    }
-
-    if (result.isEmpty) {
-      return result;
-    }
-
-    return result.substring(0, result.length - 2);
-  }
-
-  String _showYear(String? date) {
-    final String? year = date == null ? "" : date.substring(0, 4);
-    return "$year";
   }
 }

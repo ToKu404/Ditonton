@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/popular_tvs_bloc/popular_tvs_bloc.dart';
-import '../widgets/tv_card_grid.dart';
+import '../widgets/tv_card_vertical.dart';
 
 class PopularTvsPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-tvs';

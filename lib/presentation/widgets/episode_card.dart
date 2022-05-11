@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -56,18 +55,7 @@ class EpisodeCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 6,
-          ),
-          Container(
-            width: 180,
-            height: 40,
-            child: Text(
-              eps.overview,
-              maxLines: 2,
-              style: TextStyle(color: kDavysGrey, fontSize: 11, height: 1.2),
-            ),
-          )
+          
         ],
       ),
     );

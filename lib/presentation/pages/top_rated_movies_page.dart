@@ -2,7 +2,7 @@ import 'package:ditonton/presentation/bloc/top_rated_movies_bloc/top_rated_movie
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/movie_card_grid.dart';
+import '../widgets/movie_card_vertical.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/on_the_air_tvs_bloc/on_the_air_tvs_bloc.dart';
-import '../widgets/tv_card_grid.dart';
+import '../widgets/tv_card_vertical.dart';
 
 class OnTheAirTvsPage extends StatefulWidget {
   static const ROUTE_NAME = '/on-the-air-tvs';
