@@ -1,9 +1,11 @@
-import '../../common/state_enum.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/tv_provider/popular_tvs_notifier.dart';
-import '../widgets/tv_card_list.dart';
+import '../bloc/popular_tvs_bloc/popular_tvs_bloc.dart';
+import '../widgets/tv_card_grid.dart';
 
 class PopularTvsPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-tvs';
@@ -16,38 +18,43 @@ class _PopularTvsPageState extends State<PopularTvsPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularTvsNotifier>(context, listen: false)
-            .fetchPopularTvs());
+    Provider.of<PopularTvsBloc>(context, listen: false)
+      ..add(FetchPopularTvs());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(EvaIcons.arrowBack),
+        ),
         title: Text('Popular Tv Shows'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvsNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<PopularTvsBloc, PopularTvsState>(
+          builder: (context, state) {
+            if (state is PopularTvsLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is PopularTvsHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tvShow = data.tvs[index];
-                  return TvCard(tvShow);
+                  final tv = state.listTv[index];
+                  return TvCard(tv);
                 },
-                itemCount: data.tvs.length,
+                itemCount: state.listTv.length,
               );
-            } else {
+            } else if (state is PopularTvsError) {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else {
+              return Center();
             }
           },
         ),

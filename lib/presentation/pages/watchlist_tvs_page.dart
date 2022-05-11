@@ -1,10 +1,11 @@
-import '../../common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_bloc/watchlist_tv_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../common/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/tv_provider/watchlist_tv_notifier.dart';
-import '../widgets/tv_card_list.dart';
+import '../widgets/tv_card_grid.dart';
 
 class WatchlistTvsPage extends StatefulWidget {
   @override
@@ -16,9 +17,9 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage>
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
-            .fetchWatchlistTvs());
+   Future.microtask(() =>
+        Provider.of<WatchlistTvBloc>(context, listen: false)
+          ..add(FetchWatchlistTv()));
   }
 
   @override
@@ -28,33 +29,35 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false)
-        .fetchWatchlistTvs();
+   Provider.of<WatchlistTvBloc>(context, listen: false)
+      ..add(FetchWatchlistTv());
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Consumer<WatchlistTvNotifier>(
-        builder: (context, data, child) {
-          if (data.watchlistState == RequestState.Loading) {
+      child:BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
+        builder: (context, state) {
+          if (state is WatchlistTvLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.Loaded) {
+          } else if (state is WatchlistTvHasData) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final tvShow = data.watchlistTvs[index];
-                return TvCard(tvShow);
+                final tv = state.listTv[index];
+                return TvCard(tv);
               },
-              itemCount: data.watchlistTvs.length,
+              itemCount: state.listTv.length,
             );
-          } else {
+          } else if (state is WatchlistTvError) {
             return Center(
               key: Key('error_message'),
-              child: Text(data.message),
+              child: Text(state.message),
             );
+          } else {
+            return Center();
           }
         },
       ),

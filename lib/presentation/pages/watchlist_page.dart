@@ -29,6 +29,10 @@ class _WatchlistPageState extends State<WatchlistPage> {
             ],
           ),
           title: const Text('Watchlist'),
+          leading: IconButton(
+            icon: Icon(EvaIcons.arrowBack),
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
         body: TabBarView(
           children: [WatchlistMoviesPage(), WatchlistTvsPage()],

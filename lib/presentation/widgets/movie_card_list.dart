@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -5,15 +6,19 @@ import '../../common/constants.dart';
 import '../../domain/entities/movie.dart';
 import '../pages/movie_detail_page.dart';
 
-class MovieCard extends StatelessWidget {
-  final Movie movie;
+class MovieCardList extends StatelessWidget {
+  const MovieCardList({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
-  MovieCard(this.movie);
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      width: 110,
+      padding: const EdgeInsets.only(left: 8, bottom: 8, top: 4),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(
@@ -22,53 +27,16 @@ class MovieCard extends StatelessWidget {
             arguments: movie.id,
           );
         },
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            Card(
-              child: Container(
-                margin: const EdgeInsets.only(
-                  left: 16 + 80 + 16,
-                  bottom: 8,
-                  right: 8,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      movie.title ?? '-',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: kHeading6,
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      movie.overview ?? '-',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          child: CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(),
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 16,
-                bottom: 16,
-              ),
-              child: ClipRRect(
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  width: 80,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-            ),
-          ],
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
       ),
     );

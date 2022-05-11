@@ -2,7 +2,7 @@ import 'package:ditonton/presentation/bloc/watchlist_movie_bloc/watchlist_movie_
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/utils.dart';
-import '../widgets/movie_card_list.dart';
+import '../widgets/movie_card_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,11 +16,9 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   @override
   void initState() {
     super.initState();
-    Provider.of<WatchlistMovieBloc>(context, listen: false)
-      ..add(FetchWatchlistMovie());
-    // Future.microtask(() =>
-    //     Provider.of<WatchlistMovieNotifier>(context, listen: false)
-    //         .fetchWatchlistMovies());
+    Future.microtask(() =>
+        Provider.of<WatchlistMovieBloc>(context, listen: false)
+          ..add(FetchWatchlistMovie()));
   }
 
   @override

@@ -6,6 +6,7 @@ import '../../common/constants.dart';
 import '../../domain/entities/movie.dart';
 import '../bloc/popular_movies_bloc/popular_movies_bloc.dart';
 import '../bloc/top_rated_movies_bloc/top_rated_movies_bloc.dart';
+import '../widgets/movie_card_list.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
 import 'top_rated_movies_page.dart';
@@ -20,12 +21,14 @@ class _MoviePageState extends State<MoviePage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<NowPlayingMoviesBloc>(context, listen: false)
-      ..add(FetchNowPlayingMovies());
-    BlocProvider.of<TopRatedMoviesBloc>(context, listen: false)
-      ..add(FetchTopRatedMovies());
-    BlocProvider.of<PopularMoviesBloc>(context, listen: false)
-      ..add(FetchPopularMovies());
+    Future.microtask(() {
+      BlocProvider.of<NowPlayingMoviesBloc>(context, listen: false)
+        ..add(FetchNowPlayingMovies());
+      BlocProvider.of<TopRatedMoviesBloc>(context, listen: false)
+        ..add(FetchTopRatedMovies());
+      BlocProvider.of<PopularMoviesBloc>(context, listen: false)
+        ..add(FetchPopularMovies());
+    });
   }
 
   @override
@@ -47,13 +50,20 @@ class _MoviePageState extends State<MoviePage> {
           BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
             builder: ((context, state) {
               if (state is NowPlayingMovieLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  height: 170,
+                  width: double.infinity,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               } else if (state is NowPlayingMovieHasData) {
                 return MovieList(state.listMovie);
               } else {
-                return Text('Failed');
+                return Container(
+                    height: 170,
+                    width: double.infinity,
+                    child: Center(child: Text('Failed')));
               }
             }),
           ),
@@ -65,13 +75,20 @@ class _MoviePageState extends State<MoviePage> {
           BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
             builder: ((context, state) {
               if (state is PopularMoviesLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  height: 170,
+                  width: double.infinity,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               } else if (state is PopularMoviesHasData) {
                 return MovieList(state.listMovie);
               } else {
-                return Text('Failed');
+                return Container(
+                    height: 170,
+                    width: double.infinity,
+                    child: Center(child: Text('Failed')));
               }
             }),
           ),
@@ -83,13 +100,20 @@ class _MoviePageState extends State<MoviePage> {
           BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
             builder: ((context, state) {
               if (state is TopRatedMoviesLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  height: 170,
+                  width: double.infinity,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               } else if (state is TopRatedMoviesHasData) {
                 return MovieList(state.listMovie);
               } else {
-                return Text('Failed');
+                return Container(
+                    height: 170,
+                    width: double.infinity,
+                    child: Center(child: Text('Failed')));
               }
             }),
           ),
@@ -115,7 +139,8 @@ class _MoviePageState extends State<MoviePage> {
             padding: const EdgeInsets.all(8.0),
             child: Icon(
               EvaIcons.arrowIosForward,
-              size: 18,
+              size: 20,
+              color: kDavysGrey,
             ),
           ),
         ),
@@ -137,33 +162,11 @@ class MovieList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
-          return Container(
-            width: 110,
-            padding: const EdgeInsets.only(left: 8, bottom: 8, top: 4),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  MovieDetailPage.ROUTE_NAME,
-                  arguments: movie.id,
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
-            ),
-          );
+          return MovieCardList(movie: movie);
         },
         itemCount: movies.length,
       ),
     );
   }
 }
+

@@ -1,8 +1,9 @@
 import 'package:ditonton/presentation/bloc/popular_movies_bloc/popular_movies_bloc.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
-import '../widgets/movie_card_list.dart';
+import '../widgets/movie_card_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,10 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Popular Movies'),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(EvaIcons.arrowBack),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -3,10 +3,10 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/constants.dart';
 import '../bloc/tv_search_bloc/tv_search_bloc.dart';
-import '../widgets/movie_card_list.dart';
+import '../widgets/movie_card_grid.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/tv_card_list.dart';
+import '../widgets/tv_card_grid.dart';
 
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
@@ -35,6 +35,7 @@ class SearchPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextField(
+                autofocus: true,
                 onSubmitted: (query) {
                   context
                       .read<MovieSearchBloc>()
