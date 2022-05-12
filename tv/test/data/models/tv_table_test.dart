@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tv/data/models/tv_table.dart';
 import 'package:tv/domain/entities/tv.dart';
+import '../../dummy_data/dummy_objects.dart';
 
 import '../../json_reader.dart';
 
@@ -21,7 +22,7 @@ void main() {
     posterPath: "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
   );
 
-   group("toEntity", () {
+  group("toEntity", () {
     test('should be TvTable Model subclass of Tv watchlist Entity', () async {
       final result = tTvTableModel.toEntity();
       expect(result, tTvWatchlist);
@@ -32,7 +33,7 @@ void main() {
     test('should return a valid model from JSON', () async {
       // arrange
       final Map<String, dynamic> jsonMap =
-          json.decode(readJson('dummy_data/tv_table.json'));
+          await json.decode(readJson('dummy_data/tv_table.json'));
       // act
       final result = TvTable.fromMap(jsonMap);
       // assert
