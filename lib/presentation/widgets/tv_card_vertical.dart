@@ -38,7 +38,7 @@ class TvCard extends StatelessWidget {
               child: Container(
                 height: 80,
                 margin: const EdgeInsets.only(
-                    left: 16 + 110 + 8, bottom: 16, right: 8, top: 8),
+                    left: 16 + 90 + 8, bottom: 16, right: 8, top: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,16 +66,16 @@ class TvCard extends StatelessWidget {
                 left: 12,
                 bottom: 16,
               ),
-              width: 110,
-              height: 130,
+              width: 90,
+              height: 120,
               child: CachedNetworkImage(
                 imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
                 placeholder: (context, url) => Center(
                   child: CircularProgressIndicator(),
                 ),
                 imageBuilder: (context, imageProvider) => Container(
-                  width: 110,
-                  height: 130,
+                  width: 90,
+                  height: 120,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       border: Border.all(width: 1, color: kMikadoYellow),

@@ -1,3 +1,4 @@
+import 'package:ditonton/common/http_ssl_pinning.dart';
 import 'package:ditonton/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
@@ -45,7 +46,6 @@ import 'domain/usecases/tv_usecase/get_tv_recommendations.dart';
 import 'domain/usecases/tv_usecase/get_watchlist_tv_status.dart';
 import 'domain/usecases/tv_usecase/get_watchlist_tvs.dart';
 import 'domain/usecases/tv_usecase/search_tvs.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 
@@ -160,5 +160,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }

@@ -1,7 +1,9 @@
 import 'package:ditonton/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'common/http_ssl_pinning.dart';
 import 'presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'presentation/bloc/now_playing_movies_bloc/now_playing_movies_bloc.dart';
 import 'presentation/bloc/on_the_air_tvs_bloc/on_the_air_tvs_bloc.dart';
@@ -33,7 +35,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'injection.dart' as di;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await HttpSSLPinning.init();
   di.init();
   runApp(MyApp());
 }
@@ -43,7 +48,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        
         BlocProvider(
           create: (_) => di.locator<MovieSearchBloc>(),
         ),
@@ -131,7 +135,7 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => PopularTvsPage());
             case TopRatedTvsPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TopRatedTvsPage());
-            
+
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
