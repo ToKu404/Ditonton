@@ -34,6 +34,14 @@ dependencies:
   local_db:
     path: local_db
   
+
+dev_dependencies:
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^9.0.3
+  flutter_lints: ^2.0.0
   
 flutter:
 
