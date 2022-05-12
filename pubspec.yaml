@@ -33,6 +33,7 @@ dependencies:
     path: watchlist
   local_db:
     path: local_db
+  test_cov_console: ^0.2.2
   
 
 dev_dependencies:

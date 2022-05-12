@@ -1,0 +1,15 @@
+{
+    "id":1,
+    "episodes":[
+        {
+            "episode_number" : 1,
+            "id" : 1,
+            "name" : "Name",
+            "overview" : "Overview",
+            "still_path" : "/7GhSiFhXOg81AevNQWrX6DOEL1U.jpg"
+          
+        }
+    ],
+    "name": "Season 1",
+    "season_number": 1
+}
