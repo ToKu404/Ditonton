@@ -19,7 +19,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   void initState() {
     super.initState();
     BlocProvider.of<TopRatedMoviesBloc>(context, listen: false)
-      .add(FetchTopRatedMovies());
+        .add(FetchTopRatedMovies());
   }
 
   @override
@@ -44,7 +44,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.listMovie[index];
-                  return MovieCard(movie);
+                  return MovieCardVertical(movie);
                 },
                 itemCount: state.listMovie.length,
               );

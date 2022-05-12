@@ -20,7 +20,7 @@ class _OnTheAirTvsPageState extends State<OnTheAirTvsPage> {
   void initState() {
     super.initState();
     BlocProvider.of<OnTheAirTvsBloc>(context, listen: false)
-      .add(FetchOnTheAirTvs());
+        .add(FetchOnTheAirTvs());
   }
 
   @override
@@ -45,7 +45,7 @@ class _OnTheAirTvsPageState extends State<OnTheAirTvsPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.listTv[index];
-                  return TvCard(tv);
+                  return TvCardVertical(tv);
                 },
                 itemCount: state.listTv.length,
               );

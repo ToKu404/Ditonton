@@ -31,9 +31,9 @@ class _TvDetailPageState extends State<TvDetailPage> {
     super.initState();
     Future.microtask(() {
       BlocProvider.of<TvDetailBloc>(context, listen: false)
-        .add(FetchTvDetail(widget.id));
+          .add(FetchTvDetail(widget.id));
       BlocProvider.of<TvWatchlistBloc>(context, listen: false)
-        .add(LoadWatchlistStatus(widget.id));
+          .add(LoadWatchlistStatus(widget.id));
     });
   }
 
@@ -88,7 +88,9 @@ class DetailContent extends StatelessWidget {
   final List<Tv> recommendations;
   final bool isAddedWatchlist;
 
-  const DetailContent(this.tv, this.recommendations, this.isAddedWatchlist, {Key? key}) : super(key: key);
+  const DetailContent(this.tv, this.recommendations, this.isAddedWatchlist,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +132,8 @@ class DetailContent extends StatelessWidget {
                     placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(),
                     ),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   Container(
                     width: screenWidth,
@@ -142,7 +145,8 @@ class DetailContent extends StatelessWidget {
                             end: Alignment.topCenter)),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 140, left: 16, right: 16),
+                    margin:
+                        const EdgeInsets.only(top: 140, left: 16, right: 16),
                     child: Row(
                       children: [
                         ClipRRect(
@@ -187,7 +191,8 @@ class DetailContent extends StatelessWidget {
                                     RatingBarIndicator(
                                       rating: tv.voteAverage / 2,
                                       itemCount: 5,
-                                      itemBuilder: (context, index) => const Icon(
+                                      itemBuilder: (context, index) =>
+                                          const Icon(
                                         Icons.star,
                                         color: kMikadoYellow,
                                       ),
@@ -198,7 +203,8 @@ class DetailContent extends StatelessWidget {
                                     ),
                                     Text(
                                       '${tv.voteAverage}',
-                                      style: const TextStyle(color: kMikadoYellow),
+                                      style:
+                                          const TextStyle(color: kMikadoYellow),
                                     )
                                   ],
                                 ),
@@ -220,10 +226,10 @@ class DetailContent extends StatelessWidget {
                   onTap: () async {
                     if (!isAddedWatchlist) {
                       BlocProvider.of<TvWatchlistBloc>(context, listen: false)
-                        .add(AddToWatchlist(tv));
+                          .add(AddToWatchlist(tv));
                     } else {
                       BlocProvider.of<TvWatchlistBloc>(context, listen: false)
-                        .add(RemoveFromWatchList(tv));
+                          .add(RemoveFromWatchList(tv));
                     }
                   },
                   child: Container(
@@ -351,7 +357,7 @@ class DetailContent extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           final tv = recommendations[index];
-                          return TvCardList(tv: tv);
+                          return TvCardHorizontal(tv: tv);
                         },
                         itemCount: recommendations.length,
                       ),
@@ -387,7 +393,7 @@ class _SeasonContentState extends State<SeasonContent> {
   void initState() {
     super.initState();
     BlocProvider.of<TvSeasonBloc>(context, listen: false)
-      .add(FetchTvSeason(widget.tv.id, widget.tv.seasons[0].seasonNumber));
+        .add(FetchTvSeason(widget.tv.id, widget.tv.seasons[0].seasonNumber));
   }
 
   @override
@@ -410,8 +416,8 @@ class _SeasonContentState extends State<SeasonContent> {
                       setState(() {
                         _selectIndex = index;
                         BlocProvider.of<TvSeasonBloc>(context, listen: false)
-                          .add(FetchTvSeason(widget.tv.id,
-                              widget.tv.seasons[index].seasonNumber));
+                            .add(FetchTvSeason(widget.tv.id,
+                                widget.tv.seasons[index].seasonNumber));
                       });
                     },
                     child: Container(

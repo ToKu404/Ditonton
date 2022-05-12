@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/movie.dart';
 import '../pages/movie_detail_page.dart';
 
-
-class MovieCard extends StatelessWidget {
+class MovieCardVertical extends StatelessWidget {
   final Movie movie;
 
-  const MovieCard(this.movie, {Key? key}) : super(key: key);
+  const MovieCardVertical(this.movie, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,9 @@ class MovieCard extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  boxShadow: const [BoxShadow(color: kDavysGrey, blurRadius: 2)],
+                  boxShadow: const [
+                    BoxShadow(color: kDavysGrey, blurRadius: 2)
+                  ],
                   // border: Border.all(width: 1, color: kWhite),
                   borderRadius: BorderRadius.circular(8),
                   gradient: const LinearGradient(

@@ -9,7 +9,6 @@ import '../widgets/tv_card_horizontal.dart';
 import 'top_rated_tvs_page.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../domain/entities/tv.dart';
 import 'on_the_air_tvs_page.dart';
 import 'popular_tvs_page.dart';
@@ -26,11 +25,11 @@ class _TvPageState extends State<TvPage> {
     super.initState();
     Future.microtask(() {
       BlocProvider.of<OnTheAirTvsBloc>(context, listen: false)
-        .add(FetchOnTheAirTvs());
+          .add(FetchOnTheAirTvs());
       BlocProvider.of<TopRatedTvsBloc>(context, listen: false)
-        .add(FetchTopRatedTvs());
+          .add(FetchTopRatedTvs());
       BlocProvider.of<PopularTvsBloc>(context, listen: false)
-        .add(FetchPopularTvs());
+          .add(FetchPopularTvs());
     });
   }
 
@@ -164,7 +163,7 @@ class TvList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final tv = tvs[index];
-          return TvCardList(tv: tv);
+          return TvCardHorizontal(tv: tv);
         },
         itemCount: tvs.length,
       ),

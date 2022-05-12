@@ -11,7 +11,10 @@ import '../bloc/tv_search_bloc/tv_search_bloc.dart';
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
   final List<String> _tabTitle = ['Movies', 'Tv Shows'];
-  final List<Widget> _bodyPage = [const SearchMovieResult(), const SearchTvResult()];
+  final List<Widget> _bodyPage = [
+    const SearchMovieResult(),
+    const SearchTvResult()
+  ];
 
   SearchPage({Key? key}) : super(key: key);
 
@@ -25,7 +28,9 @@ class SearchPage extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
-              context.read<MovieSearchBloc>().add(const OnQueryMovieChanged(""));
+              context
+                  .read<MovieSearchBloc>()
+                  .add(const OnQueryMovieChanged(""));
               context.read<TvSearchBloc>().add(const OnQueryTvChanged(""));
             },
             icon: const Icon(EvaIcons.arrowBack),
@@ -95,7 +100,7 @@ class SearchMovieResult extends StatelessWidget {
               itemCount: result.length,
               itemBuilder: ((context, index) {
                 final movie = result[index];
-                return MovieCard(movie);
+                return MovieCardVertical(movie);
               }));
         } else if (state is MovieSearchEmpty) {
           return Center(
@@ -133,7 +138,7 @@ class SearchTvResult extends StatelessWidget {
             itemCount: result.length,
             itemBuilder: ((context, index) {
               final movie = result[index];
-              return TvCard(movie);
+              return TvCardVertical(movie);
             }),
           );
         } else if (state is TvSearchEmpty) {

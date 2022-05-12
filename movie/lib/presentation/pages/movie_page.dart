@@ -9,6 +9,7 @@ import '../bloc/popular_movies_bloc/popular_movies_bloc.dart';
 import '../bloc/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import '../widgets/movie_card_horizontal.dart';
 import 'package:flutter/material.dart';
+
 class MoviePage extends StatefulWidget {
   const MoviePage({Key? key}) : super(key: key);
 
@@ -22,11 +23,11 @@ class _MoviePageState extends State<MoviePage> {
     super.initState();
     Future.microtask(() {
       BlocProvider.of<NowPlayingMoviesBloc>(context, listen: false)
-        .add(FetchNowPlayingMovies());
+          .add(FetchNowPlayingMovies());
       BlocProvider.of<TopRatedMoviesBloc>(context, listen: false)
-        .add(FetchTopRatedMovies());
+          .add(FetchTopRatedMovies());
       BlocProvider.of<PopularMoviesBloc>(context, listen: false)
-        .add(FetchPopularMovies());
+          .add(FetchPopularMovies());
     });
   }
 
@@ -162,7 +163,7 @@ class MovieList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
-          return MovieCardList(movie: movie);
+          return MovieCardHorizontal(movie: movie);
         },
         itemCount: movies.length,
       ),

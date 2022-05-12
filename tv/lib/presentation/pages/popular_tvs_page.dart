@@ -20,7 +20,7 @@ class _PopularTvsPageState extends State<PopularTvsPage> {
   void initState() {
     super.initState();
     BlocProvider.of<PopularTvsBloc>(context, listen: false)
-      .add(FetchPopularTvs());
+        .add(FetchPopularTvs());
   }
 
   @override
@@ -45,7 +45,7 @@ class _PopularTvsPageState extends State<PopularTvsPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.listTv[index];
-                  return TvCard(tv);
+                  return TvCardVertical(tv);
                 },
                 itemCount: state.listTv.length,
               );

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/movie.dart';
 import '../pages/movie_detail_page.dart';
 
-class MovieCardList extends StatelessWidget {
-  const MovieCardList({
+class MovieCardHorizontal extends StatelessWidget {
+  const MovieCardHorizontal({
     Key? key,
     required this.movie,
   }) : super(key: key);
@@ -16,6 +16,7 @@ class MovieCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key('movieCardKey'),
       width: 110,
       padding: const EdgeInsets.only(right: 8, bottom: 8, top: 4),
       child: InkWell(

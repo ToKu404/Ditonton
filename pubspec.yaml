@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -19,6 +19,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   firebase_core: ^1.6.0
   firebase_crashlytics: ^2.7.2
+  eva_icons_flutter: ^3.1.0
   about:
     path: about
   core:
@@ -42,6 +43,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   bloc_test: ^9.0.3
+  integration_test:
+    sdk: flutter
   
 flutter:
 

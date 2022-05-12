@@ -5,7 +5,6 @@ import 'package:movie/presentation/widgets/movie_card_vertical.dart';
 
 import '../bloc/watchlist_movie_bloc/watchlist_movie_bloc.dart';
 
-
 class WatchlistMoviesPage extends StatefulWidget {
   const WatchlistMoviesPage({Key? key}) : super(key: key);
 
@@ -32,7 +31,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   @override
   void didPopNext() {
     BlocProvider.of<WatchlistMovieBloc>(context, listen: false)
-      .add(FetchWatchlistMovie());
+        .add(FetchWatchlistMovie());
   }
 
   @override
@@ -50,7 +49,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               padding: const EdgeInsets.only(top: 8),
               itemBuilder: (context, index) {
                 final movie = state.listMovie[index];
-                return MovieCard(movie);
+                return MovieCardVertical(movie);
               },
               itemCount: state.listMovie.length,
             );

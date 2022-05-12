@@ -7,7 +7,6 @@ import 'package:search/presentation/pages/search_page.dart';
 import 'package:tv/presentation/pages/tv_page.dart';
 import 'package:watchlist/presentation/pages/watchlist_page.dart';
 
-
 class HomePage extends StatefulWidget {
   static const ROUTE_NAME = '/home';
   const HomePage({Key? key}) : super(key: key);
@@ -44,6 +43,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               EvaIcons.bookmark,
+              key: Key('Watchlist'),
             ),
             label: 'Watchlist',
           ),

@@ -12,7 +12,7 @@ import 'package:http/http.dart' as _i5;
 import 'package:local_db/data/datasources/db/database_helper.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie/data/models/movie_table.dart' as _i9;
-import 'package:sqflite/sqflite.dart' as _i8;
+import 'package:sqflite_sqlcipher/sqflite.dart' as _i8;
 import 'package:tv/data/datasources/tv_local_data_source.dart' as _i18;
 import 'package:tv/data/datasources/tv_remote_data_source.dart' as _i16;
 import 'package:tv/data/models/tv_detail_model.dart' as _i3;

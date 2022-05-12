@@ -44,7 +44,7 @@ class _TopRatedTvsPageState extends State<TopRatedTvsPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.listTv[index];
-                  return TvCard(tv);
+                  return TvCardVertical(tv);
                 },
                 itemCount: state.listTv.length,
               );

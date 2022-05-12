@@ -29,7 +29,7 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> with RouteAware {
   @override
   void didPopNext() {
     BlocProvider.of<WatchlistTvBloc>(context, listen: false)
-      .add(FetchWatchlistTv());
+        .add(FetchWatchlistTv());
   }
 
   @override
@@ -47,7 +47,7 @@ class _WatchlistTvsPageState extends State<WatchlistTvsPage> with RouteAware {
               padding: const EdgeInsets.only(top: 8),
               itemBuilder: (context, index) {
                 final tv = state.listTv[index];
-                return TvCard(tv);
+                return TvCardVertical(tv);
               },
               itemCount: state.listTv.length,
             );

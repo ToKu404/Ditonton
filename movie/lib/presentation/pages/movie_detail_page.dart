@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 
-
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/movie-detail';
 
@@ -28,9 +27,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     super.initState();
     Future.microtask(() {
       BlocProvider.of<MovieDetailBloc>(context, listen: false)
-        .add(FetchMovieDetail(widget.id));
+          .add(FetchMovieDetail(widget.id));
       BlocProvider.of<MovieWatchlistBloc>(context, listen: false)
-        .add(LoadWatchlistStatus(widget.id));
+          .add(LoadWatchlistStatus(widget.id));
     });
   }
 
@@ -85,7 +84,9 @@ class DetailContent extends StatelessWidget {
   final List<Movie> recommendations;
   final bool isAddedToWatchlist;
 
-  const DetailContent(this.movie, this.recommendations, this.isAddedToWatchlist, {Key? key}) : super(key: key);
+  const DetailContent(this.movie, this.recommendations, this.isAddedToWatchlist,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +128,8 @@ class DetailContent extends StatelessWidget {
                     placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(),
                     ),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   Container(
                     width: screenWidth,
@@ -139,7 +141,8 @@ class DetailContent extends StatelessWidget {
                             end: Alignment.topCenter)),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 140, left: 16, right: 16),
+                    margin:
+                        const EdgeInsets.only(top: 140, left: 16, right: 16),
                     child: Row(
                       children: [
                         ClipRRect(
@@ -184,7 +187,8 @@ class DetailContent extends StatelessWidget {
                                     RatingBarIndicator(
                                       rating: movie.voteAverage / 2,
                                       itemCount: 5,
-                                      itemBuilder: (context, index) => const Icon(
+                                      itemBuilder: (context, index) =>
+                                          const Icon(
                                         Icons.star,
                                         color: kMikadoYellow,
                                       ),
@@ -195,7 +199,8 @@ class DetailContent extends StatelessWidget {
                                     ),
                                     Text(
                                       '${movie.voteAverage}',
-                                      style: const TextStyle(color: kMikadoYellow),
+                                      style:
+                                          const TextStyle(color: kMikadoYellow),
                                     )
                                   ],
                                 ),
@@ -212,17 +217,18 @@ class DetailContent extends StatelessWidget {
                 height: 16,
               ),
               Padding(
+                key : const Key('watchlistBtnKey'),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: InkWell(
                   onTap: () async {
                     if (!isAddedToWatchlist) {
                       BlocProvider.of<MovieWatchlistBloc>(context,
-                          listen: false)
-                        .add(AddToWatchlist(movie));
+                              listen: false)
+                          .add(AddToWatchlist(movie));
                     } else {
                       BlocProvider.of<MovieWatchlistBloc>(context,
-                          listen: false)
-                        .add(RemoveFromWatchList(movie));
+                              listen: false)
+                          .add(RemoveFromWatchList(movie));
                     }
                   },
                   child: Container(
@@ -339,7 +345,7 @@ class DetailContent extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           final movie = recommendations[index];
-                          return MovieCardList(movie: movie);
+                          return MovieCardHorizontal(movie: movie);
                         },
                         itemCount: recommendations.length,
                       ),

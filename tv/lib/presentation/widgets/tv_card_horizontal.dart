@@ -1,14 +1,12 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../domain/entities/tv.dart';
 import '../pages/tv_detail_page.dart';
 
-class TvCardList extends StatelessWidget {
-  const TvCardList({
+class TvCardHorizontal extends StatelessWidget {
+  const TvCardHorizontal({
     Key? key,
     required this.tv,
   }) : super(key: key);

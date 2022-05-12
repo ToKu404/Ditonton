@@ -1,7 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../bloc/popular_movies_bloc/popular_movies_bloc.dart';
 import '../widgets/movie_card_vertical.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +18,8 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-      BlocProvider.of<PopularMoviesBloc>(context, listen: false)
-      .add(FetchPopularMovies());
+    BlocProvider.of<PopularMoviesBloc>(context, listen: false)
+        .add(FetchPopularMovies());
   }
 
   @override
@@ -45,7 +44,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.listMovie[index];
-                  return MovieCard(movie);
+                  return MovieCardVertical(movie);
                 },
                 itemCount: state.listMovie.length,
               );

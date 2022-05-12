@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/tv.dart';
 import '../pages/tv_detail_page.dart';
 
-class TvCard extends StatelessWidget {
+class TvCardVertical extends StatelessWidget {
   final Tv tv;
 
-  const TvCard(this.tv, {Key? key}) : super(key: key);
+  const TvCardVertical(this.tv, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
