@@ -5,7 +5,7 @@ publish_to: none
 homepage:
 
 environment:
-  sdk: ">=2.16.3 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   eva_icons_flutter: ^3.1.0
