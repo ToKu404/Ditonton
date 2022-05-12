@@ -1,0 +1,36 @@
+name: watchlist
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+homepage:
+
+environment:
+  sdk: ">=2.16.3 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  local_db:
+    path: ../local_db
+  movie:
+    path: ../movie
+  tv:
+    path: ../tv
+  equatable: ^2.0.2
+  rxdart: ^0.27.3
+  dartz: ^0.10.0-nullsafety.2
+  eva_icons_flutter: ^3.1.0
+  flutter_bloc: ^8.0.1
+
+dev_dependencies:
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^9.0.3
+  flutter_lints: ^2.0.0
+
+
+flutter:

@@ -1,7 +1,7 @@
 name: ditonton
 description: A new Flutter application.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' 
 
 version: 1.0.0+1
 
@@ -14,21 +14,26 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   http: ^0.13.3
-  provider: ^6.0.2
-  dartz: ^0.10.0-nullsafety.2
-  equatable: ^2.0.2
-  google_fonts: ^2.1.0
-  flutter_rating_bar: ^4.0.0
-  cached_network_image: ^3.0.0
   get_it: ^7.1.3
-  sqflite: ^2.0.0+3
   path_provider: ^2.0.2
   flutter_bloc: ^8.0.1
-  rxdart: ^0.27.3
-  eva_icons_flutter: ^3.1.0
-  readmore: ^2.1.0
   firebase_core: ^1.6.0
   firebase_crashlytics: ^2.7.2
+  about:
+    path: about
+  core:
+    path: core
+  search:
+    path: search
+  movie:
+    path: movie
+  tv:
+    path: tv
+  watchlist:
+    path: watchlist
+  local_db:
+    path: local_db
+  
   
 
 dev_dependencies:
@@ -42,7 +47,8 @@ flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
     - certificates/
+
+

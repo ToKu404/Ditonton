@@ -1,0 +1,27 @@
+name: local_db
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+homepage:
+
+environment:
+  sdk: ">=2.16.3 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite_sqlcipher: ^2.1.0
+  encrypt: ^5.0.1
+  movie:
+    path: ../movie
+  tv:
+    path: ../tv
+  core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
