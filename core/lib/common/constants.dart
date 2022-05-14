@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
-const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+const API_KEY = 'api_key=ccb7c3823be5ff732cdd509d7467be61';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 // colors
