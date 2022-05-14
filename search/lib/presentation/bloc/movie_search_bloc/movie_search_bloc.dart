@@ -34,6 +34,7 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
           },
         );
       }),
+      transformer: debounce(const Duration(milliseconds: 500)),
     );
   }
 }

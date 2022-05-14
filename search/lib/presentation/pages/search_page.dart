@@ -43,7 +43,7 @@ class SearchPage extends StatelessWidget {
             children: [
               TextField(
                 autofocus: true,
-                onSubmitted: (query) {
+                onChanged: (query) {
                   context
                       .read<MovieSearchBloc>()
                       .add(OnQueryMovieChanged(query));

@@ -34,7 +34,7 @@ void main() {
       return tvSearchBloc;
     },
     act: (bloc) => bloc.add(const OnQueryTvChanged(tQuery)),
-    wait: const Duration(milliseconds: 100),
+    wait: const Duration(milliseconds: 500),
     expect: () => [
       TvSearchLoading(),
       TvSearchHasData(testTvList),
@@ -52,7 +52,7 @@ void main() {
       return tvSearchBloc;
     },
     act: (bloc) => bloc.add(const OnQueryTvChanged(tQuery)),
-    wait: const Duration(milliseconds: 100),
+    wait: const Duration(milliseconds: 500),
     expect: () => [
       TvSearchLoading(),
       const TvSearchHasData(<Tv>[]),
@@ -70,7 +70,7 @@ void main() {
       return tvSearchBloc;
     },
     act: (bloc) => bloc.add(const OnQueryTvChanged(tQuery)),
-    wait: const Duration(milliseconds: 100),
+    wait: const Duration(milliseconds: 500),
     expect: () => [
       TvSearchLoading(),
       const TvSearchError('Server Failure'),
